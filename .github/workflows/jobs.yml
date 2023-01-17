@@ -23,12 +23,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: cyberdanus/my_app:${{  github.sha  }}
-      - name: Get Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: /tmp/docker-build-push-*
+          tags: cyberdanus/my_app:${{  github.sha::7  }}
   push:
     runs-on: ubuntu-latest
     needs: build
