@@ -1,6 +1,15 @@
 name: CI/CD
 on:
   workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Need to push to Docker Registry?'
+        required: true
+        default: 'yes'
+        type: choice
+        options:
+        - yes
+        - no
   pull_request:
     types: [opened, reopened]
 jobs:
