@@ -25,7 +25,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: user/app:latest
+          tags: my_repo/app:latest
   push:
     runs-on: ubuntu-latest
     needs: build
