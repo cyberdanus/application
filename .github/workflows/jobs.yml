@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          if: github.event.inputs.needdeploy == 'yes'
+          if: github.event.inputs.needdeploy == '(Yes)'
           push: true
           tags: cyberdanus/my_app:${{  steps.vars.outputs.short_sha  }}
       - name: Docker pull image
