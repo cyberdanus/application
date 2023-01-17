@@ -33,10 +33,10 @@ jobs:
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
           echo "::set-output name=short_sha::$calculatedSha"
       - name: Build and push
+        if: github.event.inputs.needdeploy == '(Yes)'
         uses: docker/build-push-action@v3
         with:
           context: .
-          if: github.event.inputs.needdeploy == '(Yes)'
           push: true
           tags: cyberdanus/my_app:${{  steps.vars.outputs.short_sha  }}
       - name: Docker pull image
