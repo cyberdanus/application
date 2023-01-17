@@ -1,32 +1,27 @@
 name: Test
 on: workflow_dispatch
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get repository code
-        uses: actions/checkout@v3
-      - name: Install deps
-        run: npm install
-      - name: Test app
-        run: npm run test
-  lint:
+      - name: Print to console
+        run: echo Hello GH Actions!
+  push:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: Get repository code
-        uses: actions/checkout@v3
-      - name: Install deps
-        run: npm install
-      - name: Lint code
-        run: npm run lint
-  build:
+      - name: Print to console
+        run: echo Hello GH Actions!
+  pull:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - name: Get repository code
-        uses: actions/checkout@v3
-      - name: Install deps
-        run: npm install
-      - name: Build App
-        run: npm run build
+      - name: Print to console
+        run: echo Hello GH Actions!
+  deploy:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Print to console
+        run: echo Hello GH Actions!
+                
