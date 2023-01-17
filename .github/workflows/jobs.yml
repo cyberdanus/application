@@ -23,7 +23,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: cyberdanus/my_app:latest
+          tags: cyberdanus/my_app:${{  github.sha  }}
       - name: Get Artifact
         uses: actions/upload-artifact@v3
         with:
