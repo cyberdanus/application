@@ -41,8 +41,10 @@ jobs:
             push: true
             tags: cyberdanus/my_app:${{  steps.vars.outputs.short_sha  }}
       - name: Docker pull image
+        if: github.event.inputs.needdeploy == '(Yes)'
         run: docker pull cyberdanus/my_app:${{  steps.vars.outputs.short_sha  }}
       - name: Docker deploy latest image from Docker Registry
+        if: github.event.inputs.needdeploy == '(Yes)'
         run: docker run -p 3000:3000 -d cyberdanus/my_app:${{  steps.vars.outputs.short_sha  }}
   push:
     runs-on: ubuntu-latest
