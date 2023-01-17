@@ -18,17 +18,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Get Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: /tmp/docker-build-push-*
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: cyberdanus/my_app:latest
+      - name: Get Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: /tmp/docker-build-push-*
   push:
     runs-on: ubuntu-latest
     needs: build
