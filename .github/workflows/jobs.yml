@@ -5,12 +5,11 @@ on:
       needdeploy:
         description: 'Need to push to Docker Registry?'
         required: true
-        default: 'yes'
+        default: '(Yes)'
         type: choice
         options:
-        - yess
-        - noo
-        - debug
+        - (Yes)
+        - (No)
   pull_request:
     types: [opened, reopened]
 jobs:
