@@ -35,7 +35,8 @@ jobs:
       - name: Give script permissions
         run: chmod +x $PWD/script.sh
       - name: Execute script
-        run: $PWD/script.sh env.txt
+        # run: $PWD/script.sh env.txt
+        run: echo "DOCKER_REPO=$(bash $PWD/script.sh env.txt)" >> $GITHUB_ENV
         # run: |
         #   echo "docker_repo=$(./$PWD/script.sh)" >> $GITHUB_ENV
         #   echo "${{ env.docker_repo }}
