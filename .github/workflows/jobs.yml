@@ -76,7 +76,7 @@ jobs:
       #      SLACK_TITLE: Notify
       #      SLACK_USERNAME: JobMONs
       #      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      - name: Slack Notification V2
+      - name: Slack Notification V2 bot
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
@@ -101,7 +101,7 @@ jobs:
               ]
             }
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       - uses: slackapi/slack-github-action@v1.23.0
         with:
           # Unlike the step posting a new message, this step does not accept a channel name.
@@ -126,4 +126,4 @@ jobs:
               ]
             }
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
