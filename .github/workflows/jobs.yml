@@ -66,13 +66,64 @@ jobs:
       - name: Docker deploy latest image from Docker Registry
         if: github.event.inputs.needdeploy == '(Yes)'
         run: docker run -p 3000:3000 -d ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }}
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
+      # - name: Slack Notification
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #      SLACK_CHANNEL: messages
+      #      SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+      #      SLACK_ICON: https://github.com/rtCamp.png?size=48
+      #      SLACK_MESSAGE: "GitHub build result: ${{ github.repository }}-${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+      #      SLACK_TITLE: Notify
+      #      SLACK_USERNAME: JobMONs
+      #      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Slack Notification V2
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # The following message update step does not accept a channel name.
+          # Setting a channel ID here for consistency is highly recommended.
+          channel-id: "CHANNEL_ID"
+          payload: |
+            {
+              "text": "Deployment started (In Progress)",
+              "attachments": [
+                {
+                  "pretext": "Deployment started",
+                  "color": "dbab09",
+                  "fields": [
+                    {
+                      "title": "Status",
+                      "short": true,
+                      "value": "In Progress"
+                    }
+                  ]
+                }
+              ]
+            }
         env:
-           SLACK_CHANNEL: messages
-           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-           SLACK_ICON: https://github.com/rtCamp.png?size=48
-           SLACK_MESSAGE: "GitHub build result: ${{ github.repository }}-${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-           SLACK_TITLE: Notify
-           SLACK_USERNAME: JobMONs
-           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
+      - uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # Unlike the step posting a new message, this step does not accept a channel name.
+          # Please use a channel ID, not a name here.
+          channel-id: "CHANNEL_ID"
+          update-ts: ${{ steps.slack.outputs.ts }}
+          payload: |
+            {
+              "text": "Deployment finished (Completed)",
+              "attachments": [
+                {
+                  "pretext": "Deployment finished",
+                  "color": "28a745",
+                  "fields": [
+                    {
+                      "title": "Status",
+                      "short": true,
+                      "value": "Completed"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
