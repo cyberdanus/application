@@ -27,6 +27,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # - name: Run script from Scripts repo 
+      #   run: ./.github/scripts/build.sh
+      #   shell: bash
+      - name: Download the script
+        run: curl -o $PWD/script.sh https://raw.githubusercontent.com/cyberdanus/scripts/main/script.sh
+      - name: Give script permissions
+        run: chmod +x $PWD/script.sh
+      - name: Execute script
+        run: $PWD/script.sh env.txt
       - name: Set short git commit SHA
         id: vars
         run: |
