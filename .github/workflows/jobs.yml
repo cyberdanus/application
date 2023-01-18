@@ -11,6 +11,7 @@ on:
         - (Yes)
         - (No)
   pull_request:
+    branches: [master]
     types: [opened, reopened]
 jobs:
   build:
