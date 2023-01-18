@@ -36,13 +36,13 @@ jobs:
         with:
            repository: cyberdanus/scripts
            path: scripts
-      - name: Download the script
-        run: curl -o $PWD/script.sh https://raw.githubusercontent.com/cyberdanus/scripts/main/script.sh
-      - name: Give script permissions
-        run: chmod +x $PWD/script.sh
+      # - name: Download the script
+      #   run: curl -o $PWD/script.sh https://raw.githubusercontent.com/cyberdanus/scripts/main/script.sh
+      # - name: Give script permissions
+      #   run: chmod +x $PWD/script.sh
       - name: Execute script
         # run: $PWD/script.sh env.txt
-        run: echo "DOCKER_REPO=$(bash $PWD/script.sh env.txt)" >> $GITHUB_ENV
+        run: echo "DOCKER_REPO=$(bash /home/runner/work/application/application/scripts/script.sh env.txt)" >> $GITHUB_ENV
       - name: Test
         run: echo ${{ env.DOCKER_REPO }}
         # run: |
