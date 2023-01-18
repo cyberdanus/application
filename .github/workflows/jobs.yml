@@ -53,7 +53,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: cyberdanus/my_app:${{  steps.vars.outputs.short_sha  }}
+          tags: ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }}
       - name: Docker pull image
         if: github.event.inputs.needdeploy == '(Yes)'
         run: docker pull cyberdanus/my_app:${{  steps.vars.outputs.short_sha  }}
