@@ -35,7 +35,9 @@ jobs:
       - name: Give script permissions
         run: chmod +x $PWD/script.sh
       - name: Execute script
-        run: $PWD/script.sh env.txt
+        # run: $PWD/script.sh env.txt
+        run: echo "docker_repo=$(bash $PWD/script.sh)" >> $GITHUB_ENV
+        run: echo "${{ env.docker_repo }}
       - name: Set short git commit SHA
         id: vars
         run: |
