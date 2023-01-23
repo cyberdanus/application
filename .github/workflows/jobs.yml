@@ -59,7 +59,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }}
+          tags: ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }},${{ env.DOCKER_REPO }}:latest
       - name: Docker pull image
         if: github.event.inputs.needdeploy == '(Yes)'
         run: docker pull ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }}
