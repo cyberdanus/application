@@ -9,6 +9,8 @@ FROM node:19-alpine
 ENV NODE_ENV production
 WORKDIR /app
 COPY package*.json ./
+RUN npm add express-prometheus-metrics
+RUN npm add pkginfo
 RUN npm ci --only=production
 COPY --from=stage /app/app/*.js /app/app/
 
