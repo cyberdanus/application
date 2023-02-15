@@ -53,7 +53,9 @@ jobs:
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
           echo "::set-output name=short_sha::$calculatedSha"
       - name: Build and push
-        if: github.event.inputs.needdeploy == '(Yes)'
+        if: |
+          github.event.inputs.needdeploy == '(Yes)' ||
+          github.event_name == 'pull_request'
         uses: docker/build-push-action@v3
         with:
           context: .
