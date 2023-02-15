@@ -9,7 +9,7 @@ on:
         type: choice
         options:
         - (Yes)
-        - (No)
+        - (No.)
   pull_request:
     branches: [master]
     types: [opened, reopened]
