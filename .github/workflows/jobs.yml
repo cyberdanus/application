@@ -9,7 +9,7 @@ on:
         type: choice
         options:
         - (Yes)
-        - (No.)
+        - (No)
   pull_request:
     types: [opened, reopened]
 jobs:
