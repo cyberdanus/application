@@ -9,9 +9,8 @@ on:
         type: choice
         options:
         - (Yes)
-        - (No)
+        - (No.)
   pull_request:
-    branches: [dev]
     types: [opened, reopened]
 jobs:
   build:
