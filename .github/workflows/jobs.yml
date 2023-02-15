@@ -60,10 +60,14 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }},${{ env.DOCKER_REPO }}:latest
       - name: Docker pull image
-        if: github.event.inputs.needdeploy == '(Yes)'
+        if: |
+          github.event.inputs.needdeploy == '(Yes)' ||
+          github.event_name == 'pull_request'
         run: docker pull ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }}
       - name: Docker deploy latest image from Docker Registry
-        if: github.event.inputs.needdeploy == '(Yes)'
+        if: |
+          github.event.inputs.needdeploy == '(Yes)' ||
+          github.event_name == 'pull_request'
         run: docker run -p 3000:3000 -d ${{ env.DOCKER_REPO }}:${{  steps.vars.outputs.short_sha  }}
       # - name: Slack Notification
       #   uses: rtCamp/action-slack-notify@v2
